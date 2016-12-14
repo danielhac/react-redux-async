@@ -1,1 +1,1 @@
-export const CREATE_WINE = 'CREATE_WINE';
+export const LOAD_WINES_SUCCESS = 'LOAD_WINES_SUCCESS';

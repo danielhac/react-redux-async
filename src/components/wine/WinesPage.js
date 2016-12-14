@@ -2,30 +2,12 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as wineActions from '../../actions/wineActions';
+import WineList from './WineList';
 
 class WinesPage extends React.Component {
     constructor(props, context) {
         super(props, context);
 
-        this.state = {
-            wine: {title: "" }
-        };
-
-        // bind.(this): binds to WinesPage component
-        this.onTitleChange = this.onTitleChange.bind(this);
-        this.onClickSave = this.onClickSave.bind(this);
-    }
-
-    onTitleChange(event) {
-        const wine = this.state.wine;
-        // pull value out of event off of the target
-        wine.title = event.target.value;
-        // update state
-        this.setState({wine: wine});
-    }
-
-    onClickSave() {
-        this.props.actions.createWine(this.state.wine);
     }
 
     wineRow(wine, index) {
@@ -33,23 +15,14 @@ class WinesPage extends React.Component {
     }
 
     render() {
+        const {wines} = this.props;
+
         return (
             <div>
                 <h1>Wines</h1>
                 <p>All about my time with wine</p>
-                <h2>Add Wine</h2>
-                <input
-                    type="text"
-                    onChange={this.onTitleChange}
-                    value={this.state.wine.title} />
-
-                <input
-                    type="submit"
-                    value="Save"
-                    onClick={this.onClickSave} />
                 <div id="space"></div>
-
-                {this.props.wines.map(this.wineRow)}
+                <WineList wines={wines}/>
             </div>
         );
     }
